@@ -62,7 +62,7 @@ extern "C" {
  * This value must be between 1 and 32
  */
 #ifndef RTE_EFD_VALUE_NUM_BITS
-#define RTE_EFD_VALUE_NUM_BITS (8)
+#define RTE_EFD_VALUE_NUM_BITS (1)
 #endif
 
 /*
