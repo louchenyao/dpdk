@@ -1,4 +1,6 @@
-# ignore builds
+# ignore bazel caches
+bazel-*
+
 x86_64-native-linux-gcc
 
 # ignore hidden files
