@@ -33,14 +33,36 @@ void init_rte_eal() {
 template <typename KEY_TYPE>
 class SepSet {
    public:
+    SepSet() = default;
+    
     SepSet(int max_capacity) {
+        init(max_capacity);
+    }
+
+    ~SepSet() {
+        clear();
+    }
+
+    void init(int max_capacity) {
+        assert(table_ == nullptr);
         init_rte_eal();
         table_ = rte_efd_create(("sepset_" + std::to_string(rand())).c_str(),
                                 max_capacity, sizeof(KEY_TYPE), 1, 1);
         assert(table_ != nullptr);
     }
 
-    ~SepSet() { rte_efd_free(table_); }
+    void clear() {
+        if (table_ != nullptr) {
+            rte_efd_free(table_);
+            table_ = nullptr;
+        }
+    }
+
+    void build(const std::vector<std::pair<KEY_TYPE, bool>> &kvs) {
+        for (const auto &kv : kvs) {
+            update(kv.first, kv.second);
+        }
+    }
 
     inline void update(KEY_TYPE key, bool val) {
         assert(rte_efd_update(table_, 0, &key, (efd_value_t)val) == 0);

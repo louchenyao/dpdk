@@ -6,23 +6,26 @@ cc_library(
     linkopts = ["-pthread", "-lnuma", "-ldl"],
 )
 
+COPTS = ["-std=c++17", "-O3", "-march=native", "-Wall", "-Wextra", "-Werror", "-Wno-error=register"]
+LINKOPTS = ["-pthread", "-lnuma", "-ldl"]
+
 cc_library(
     name = "sepset",
     hdrs = ["ssfe_benchmarks/sepset.h"],
     strip_include_prefix = "ssfe_benchmarks",
+    copts = COPTS,
+    linkopts = LINKOPTS,
     deps = [
         ":dpdk"
-    ]
+    ],
+    visibility = ["//visibility:public"]
 )
-
-COPTS = ["-std=c++17", "-O3", "-march=native", "-Wall", "-Wextra", "-Werror", "-Wno-error=register"]
-LINKOPTS = ["-pthread", "-lnuma", "-ldl"]
 
 cc_binary(
     name = "bench",
     srcs = ["ssfe_benchmarks/bench.cpp"],
-    copts = ["-std=c++17", "-O3", "-march=native", "-Wall", "-Wextra", "-Werror", "-Wno-error=register"],
-    linkopts = ["-pthread", "-lnuma", "-ldl"],
+    copts = COPTS,
+    linkopts = LINKOPTS,
     deps = [
         ":sepset",
         "@benchmark//:benchmark", 
