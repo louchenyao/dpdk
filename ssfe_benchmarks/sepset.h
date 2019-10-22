@@ -13,6 +13,7 @@
 
 #include <cassert>
 #include <string>
+#include <vector>
 
 void init_rte_eal() {
     static bool initialized = false;
@@ -81,5 +82,5 @@ class SepSet {
         rte_efd_lookup_bulk(table_, 0, batch_size, (const void **)key_list, (efd_value_t *)res);
     }
    private:
-    rte_efd_table *table_;
+    rte_efd_table *table_ = nullptr;
 };
