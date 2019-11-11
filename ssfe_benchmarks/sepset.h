@@ -23,7 +23,7 @@ void init_rte_eal() {
     char *argv[3];
     char a0[] = "./bench";
     char a1[] = "--no-huge";
-    char a2[] = "-m256";  // reserve 256 MB memory
+    char a2[] = "-m1024";  // reserve 1024 MB memory
     argv[0] = a0;
     argv[1] = a1;
     argv[2] = a2;
@@ -66,7 +66,7 @@ class SepSet {
     }
 
     inline void update(KEY_TYPE key, bool val) {
-        assert(rte_efd_update(table_, 0, &key, (efd_value_t)val) == 0);
+        assert(rte_efd_update(table_, 0, &key, (efd_value_t)val) != RTE_EFD_UPDATE_FAILED);
     }
 
     inline bool query(KEY_TYPE key) {

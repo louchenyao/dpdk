@@ -84,10 +84,10 @@ extern "C" {
  * Recommended values for various lookuptable and hashfunc sizes are:
  *
  *   HASH_FUNC_SIZE = 16, LOOKUPTBL_SIZE = 16:
- *     EFD_TARGET_GROUP_NUM_RULES = 22
+ *     EFD_TARGET_GROUP_NUM_RULES = (default value from Intel is 22)
  *     EFD_MAX_GROUP_NUM_RULES = 28
  */
-#define EFD_TARGET_GROUP_NUM_RULES (22)
+#define EFD_TARGET_GROUP_NUM_RULES (19)
 #define EFD_MAX_GROUP_NUM_RULES (28LU)
 
 #define EFD_MIN_BALANCED_NUM_RULES      5
