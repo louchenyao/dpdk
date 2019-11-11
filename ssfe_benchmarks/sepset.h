@@ -23,7 +23,7 @@ void init_rte_eal() {
     char *argv[3];
     char a0[] = "./bench";
     char a1[] = "--no-huge";
-    char a2[] = "-m1024";  // reserve 1024 MB memory
+    char a2[] = "-m2048";  // reserve 2048 MB memory
     argv[0] = a0;
     argv[1] = a1;
     argv[2] = a2;
