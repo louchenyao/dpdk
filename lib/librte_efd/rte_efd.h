@@ -87,7 +87,7 @@ extern "C" {
  *     EFD_TARGET_GROUP_NUM_RULES = (default value from Intel is 22)
  *     EFD_MAX_GROUP_NUM_RULES = 28
  */
-#define EFD_TARGET_GROUP_NUM_RULES (18)
+#define EFD_TARGET_GROUP_NUM_RULES (17)
 #define EFD_MAX_GROUP_NUM_RULES (28LU)
 
 #define EFD_MIN_BALANCED_NUM_RULES      5
