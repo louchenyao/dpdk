@@ -12,6 +12,7 @@
 #include <rte_timer.h>
 
 #include <cassert>
+#include <cstdlib>
 #include <string>
 #include <vector>
 
@@ -21,12 +22,15 @@ void init_rte_eal() {
     initialized = true;
 
     char *argv[3];
-    char a0[] = "./bench";
-    char a1[] = "--no-huge";
-    char a2[] = "-m32768";  // reserve 32G memory
-    argv[0] = a0;
-    argv[1] = a1;
-    argv[2] = a2;
+    argv[0] = (char *)"./bench";
+    argv[1] = (char *)"--no-huge";
+    argv[2] = (char *)"-m4096";  // reserve 4G memory
+
+    // if it runs on a machine with enough memory, then reserve 16G memory
+    if (std::getenv("ENOUGH_MEMORY") != nullptr && std::string(std::getenv("ENOUGH_MEMORY")) == "1") {
+        argv[2] = (char *)"-m16384"; 
+    }
+
     int ret = rte_eal_init(3, argv);
     if (ret < 0) rte_panic("Cannot init EAL\n");
 }
