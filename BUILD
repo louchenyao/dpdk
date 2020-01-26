@@ -10,9 +10,9 @@ COPTS = ["-std=c++17", "-O3", "-march=native", "-Wall", "-Wextra", "-Werror", "-
 LINKOPTS = ["-pthread", "-lnuma", "-ldl"]
 
 cc_library(
-    name = "sepset",
-    hdrs = ["ssfe_benchmarks/sepset.h"],
-    strip_include_prefix = "ssfe_benchmarks",
+    name = "setsep",
+    hdrs = ["xorsep_wrapper/setsep.h"],
+    strip_include_prefix = "xorsep_wrapper",
     copts = COPTS,
     linkopts = LINKOPTS,
     deps = [
@@ -23,11 +23,11 @@ cc_library(
 
 cc_binary(
     name = "bench",
-    srcs = ["ssfe_benchmarks/bench.cpp"],
+    srcs = ["xorsep_wrapper/bench.cpp"],
     copts = COPTS,
     linkopts = LINKOPTS,
     deps = [
-        ":sepset",
+        ":setsep",
         "@benchmark//:benchmark", 
         "@benchmark//:benchmark_main",
     ]
@@ -35,11 +35,11 @@ cc_binary(
 
 cc_test(
     name = "test",
-    srcs = glob(["ssfe_benchmarks/*_test.cpp"]),
+    srcs = glob(["xorsep_wrapper/*_test.cpp"]),
     copts = COPTS,
     linkopts = LINKOPTS,
     deps = [
-        "//:sepset",
+        "//:setsep",
         "@gtest//:gtest",
         "@gtest//:gtest_main",
     ]

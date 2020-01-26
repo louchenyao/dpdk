@@ -36,22 +36,22 @@ void init_rte_eal() {
 }
 
 template <typename KEY_TYPE>
-class SepSet {
+class SetSep {
    public:
-    SepSet() = default;
+    SetSep() = default;
     
-    SepSet(int max_capacity) {
+    SetSep(int max_capacity) {
         init(max_capacity);
     }
 
-    ~SepSet() {
+    ~SetSep() {
         clear();
     }
 
     void init(int max_capacity) {
         assert(table_ == nullptr);
         init_rte_eal();
-        table_ = rte_efd_create(("sepset_" + std::to_string(rand())).c_str(),
+        table_ = rte_efd_create(("setsep_" + std::to_string(rand())).c_str(),
                                 max_capacity, sizeof(KEY_TYPE), 1, 1);
         assert(table_ != nullptr);
     }
